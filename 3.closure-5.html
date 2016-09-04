@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装变量</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<script>
+    var mult = function () {
+        var a=1;
+        for (var i= 0,len=arguments.length; i<len; i++){
+            a = a *arguments[i];
+        }
+
+        return a;
+    };
+
+    alert(mult(1,2,3));
+</script>
+</body>
+</html>

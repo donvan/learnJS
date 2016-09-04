@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装变量</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<script>
+    //在上个例子中，加入缓存机制,cache 暴露在全局作用域 下
+
+
+    var mult = (function () {
+        var cache={};
+
+        return function(){
+            var args = Array.prototype.join.call(arguments, ',');
+
+            if(args in cache ){
+                return cache[args];
+            }
+
+            var a=1;
+            for (var i= 0, len= arguments.length; i<len;i++){
+                a = a*arguments[i];
+            }
+            return cache[args] = a;
+        }
+
+    })();
+
+    alert(mult(1,2,3));
+    alert(mult(1,2,3));
+
+
+</script>
+</body>
+</html>

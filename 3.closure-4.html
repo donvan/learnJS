@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量的生存周期</title>
+    <style>
+        div{
+            cursor: pointer;
+            padding:15px;
+            background-color: #eeeeee;
+         margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+<div>6</div>
+<script>
+    var nodes = document.getElementsByTagName('div');
+
+//    for(var i= 0,len=nodes.length; i<len; i++){
+//        nodes[i].onclick = function(){
+//            alert(i);
+//        }
+//    }
+
+    //上面都是返回6，因为click事件是被 异步触发的，当事件被 触发 时，for循环早已结束 。此时变量i的值 已经 是5
+    //解决办法是通过 闭包，把每次循环的i值 封闭起来
+
+    for(var i= 0, len=nodes.length; i<len; i++){
+        (function(i){
+            nodes[i].onclick=function(){
+                alert(i);
+            }
+        })(i)
+    }
+
+
+</script>
+</body>
+</html>

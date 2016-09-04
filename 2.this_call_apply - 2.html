@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this,call,apply</title>
+</head>
+<body>
+<div id="div1">asfdasf</div>
+<script>
+    window.id = 'window';
+
+    document.getElementById('div1').onclick = function (){
+        "use strict"
+        var that = this;  //保存div的引用
+
+        var callback = function (){
+            //alert(this.id);  //指向window , 如果在 ECMAScript5 中(  strict)， this返回 undefined
+            alert(that.id);
+        };
+
+        callback();
+    }
+
+</script>
+</body>
+</html>

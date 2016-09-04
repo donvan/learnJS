@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this,call,apply</title>
+</head>
+<body>
+<script>
+    //作为对象的方法调用
+    var obj = {
+        a:1,
+        getA:function (){
+            alert( this===obj );
+            alert( this.a )
+        }
+    };
+
+    obj.getA();
+
+    //作为普通函数调用
+
+//    window.name = 'globalName';
+//
+//    var getName = function () {
+//        return this.name;
+//    };
+//
+//    console.log( getName() ); //输出：global
+
+    //或者
+    window.name = 'globalName';
+    var myObject = {
+        name:'seven',
+        getName:function (){
+            return this.name;
+        }
+    };
+
+    var getName = myObject.getName;
+    console.log(myObject.getName());
+    console.log( getName() );
+
+    function func(){
+        "use strict"       //
+        alert(this);
+    }
+
+    func();
+
+</script>
+</body>
+</html>
