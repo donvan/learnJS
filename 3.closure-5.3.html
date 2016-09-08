@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+    </style>
+</head>
+<body>
+<button id="execute">打开</button>
+<button id="undo">关闭</button>
+<script>
+    //把请求封装成对象，分离请求的发起者和接收者之间的耦合关系
+
+
+    var Tv = {
+        open:function (){
+            console.log('打开电视机');
+         },
+        close:function (){
+            console.log('关闭电视机');
+        }
+    };
+
+    var createCommand = function (receive){
+        var execute = function (){
+            return receive.open();  //执行命令，打开电视机
+        };
+
+        var undo = function (){
+            return receive.close();  //执行命令，关闭电视 机
+        };
+
+        return {
+            execute: execute,
+            undo: undo
+        };
+    };
+
+    var setCommand = function ( command ){
+        document.getElementById('execute').onclick = function (){
+            command.execute();
+        };
+        document.getElementById('undo').onclick = function (){
+            command.undo();
+        };
+    };
+
+    setCommand( createCommand( Tv ) );
+
+
+</script>
+</body>
+</html>
