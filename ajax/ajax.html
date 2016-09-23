@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax</title>
+	</head>
+	<body>
+		<label for="">用户名</label>
+		<span>name值</span>
+		<a href="javascript:;" onclick=ajaxread()></a>		
+		<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET','a.txt?2');
+				xhr.send();
+				
+				xhr.onreadystatechange = function () {
+					if(xhr.readyState == 4 && xhr.status == 200){
+						//alert(xhr.responseText)
+						var strJson = xhr.responseText;
+						alert(strJson);
+						//var objJson = JSON.parse(strJson);
+						var objJson = eval('(' + strJson + ')');
+						alert(objJson.name1)
+						
+					}else{
+						console.log(xhr.statusText)
+					}
+				}
+				
+				
+				var str = '{"name1":"dongfang","name2":"xiaohong","name3":"zesheng"}';
+				alert(str);
+				var obj = JSON.parse(str);
+				alert (obj.name1)
+				
+				
+				var myObject = {
+  a: {
+    one: 1, 
+    two: 2, 
+    three: 3
+  }, 
+  b: [1,2,3]
+};
+var recursiveEncoded = $.param(myObject);
+var recursiveDecoded = decodeURIComponent($.param(myObject));
+
+alert(recursiveEncoded);
+alert(recursiveDecoded);
+
+		</script>
+	</body>
+</html>
