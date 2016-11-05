@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>节流</title>
+    <script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js">
+    </script>
+</head>
+
+<body>
+<p>对比下ab</p>
+<div style="height:300px;width:1000px;">
+    <div class="a1" style="width:100px; height:100px; background-color:#000;"></div>
+    <div class="a2" style="width:1000px; height:200px; background-color:#F00; display:none;"></div>
+</div>
+<div class="b1" style="width:100px; height:100px; background-color:#000;margin-top:20px;"></div>
+<div class="b2" style="width:1000px; height:200px; background-color:#F00; display:none;"></div>
+<script type="text/javascript">
+    var throttle = function(fn, context, interval) {
+        clearTimeout(fn.tId);
+        fn.tId = setTimeout(function() {
+            fn.apply(context || null);
+        }, interval || 500);
+    };
+    $('.a1').mouseenter(function(){
+        $('.a2').fadeIn();
+    });
+    var d = function() {
+        $('.a2').fadeOut();
+    };
+    $('.a1').mouseleave(function(){
+        $('.a2').fadeOut();
+    });
+    $('.b1').mouseenter(function(){
+        $('.b2').fadeIn();
+    });
+    var timeoutId = null;
+
+
+    $('.b1').mouseleave(function(){
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(function(){
+            $('.b2').fadeOut();
+        },500);
+    });
+</script>
+</body>
+</html>

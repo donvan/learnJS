@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>单例模式</title>
+    <script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //管理单例的逻辑 返回结果或者没有的话创建并返回    管理逻辑是不变的，变化部分的是参数 fn, 可以是创建弹出层，也可以是创建iframe等
+        //我们把创建实例对象的职责和管理单例的职责分别放在两个方法时，这两个方法可以独立 变化而互不影响
+        var getSingle = function (fn){
+            var result;
+            return function (){
+                return result || (result = fn.apply(this,arguments));
+            }
+        };
+
+        //创建登录浮窗的方法用参数fn的形式传入getSingle 同样可以传入createScript,createIframe等。
+        var createLoginLayer = function (){
+            var div = document.createElement('div');
+            div.innerHTML = '我是登录浮窗';
+            div.style.display = 'none';
+            document.body.appendChild(div);
+            return div;
+        };
+
+        var createSingleIframe = getSingle(function(){
+           var iframe = document.createElement('iframe');
+            document.body.appendChild(iframe);
+            return iframe;
+        });
+
+
+        var createSingleLoginLayer = getSingle( createLoginLayer );
+        window.onload = function(){
+            document.getElementById('showModal').onclick = function(){
+                var loginLayer = createSingleLoginLayer();
+                loginLayer.style.display = 'block';
+            };
+
+
+            document.getElementById('showIframe').onclick = function(){
+              var iframeBox = createSingleIframe();
+                iframeBox.src = 'http://baidu.com';
+                iframeBox.style.width = '640px';
+                iframeBox.style.height = '400px';
+            };
+        }
+
+
+    </script>
+</head>
+
+<body>
+<p>
+<a href="javascript:;" id="showModal">点击显示弹窗</a>
+<a href="javascript:;" id="showIframe">点击显示iframe</a>
+</p>
+</body>
+</html>

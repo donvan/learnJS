@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>parseInt函数 </title>
+</head>
+<body>
+<script>
+    parseInt('123abc'); //123
+    parseInt('1.72');   //1
+    parseInt('.123');   // NaN
+
+    var d = "010";  //0开头，表示八进制
+    var e = "0x10";  //十六进制
+    parseInt(d);    // 8
+    parseInt(e);    // 16
+
+    parseInt('08',10);  //结果为8  后面参数表示基数。 建议在使用parseInt时，一定提供这个基数参数
+
+</script>
+</body>
+</html>

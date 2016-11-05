@@ -5,45 +5,45 @@
 		<title>ajax</title>
 	</head>
 	<body>
-		<label for="">用户名</label>
+		<label>用户名</label>
 		<span>name值</span>
 		<a href="javascript:;" onclick=ajaxread()></a>		
 		<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+				var now = Date.parse(new Date());
 				var xhr = new XMLHttpRequest();
-				xhr.open('GET','a.txt?2');
+				xhr.open('GET','a.txt?'+now);
 				xhr.send();
 				
 				xhr.onreadystatechange = function () {
 					if(xhr.readyState == 4 && xhr.status == 200){
 						//alert(xhr.responseText)
 						var strJson = xhr.responseText;
-						alert(strJson);
-						//var objJson = JSON.parse(strJson);
-						var objJson = eval('(' + strJson + ')');
+						alert('responseText is ' + strJson);
+						var objJson = JSON.parse(strJson);
+						//var objJson = eval('(' + strJson + ')');
 						alert(objJson.name1)
 						
 					}else{
 						console.log(xhr.statusText)
 					}
-				}
+				};
 				
 				
-				var str = '{"name1":"dongfang","name2":"xiaohong","name3":"zesheng"}';
-				alert(str);
-				var obj = JSON.parse(str);
-				alert (obj.name1)
+				var str = '{"name1":"dongfang","name2":"xiaohong","name3":"zesheng"}';  //json字符串
+				var obj = JSON.parse(str);  //转化为json对象
+				alert (obj.name1);
 				
 				
 				var myObject = {
-  a: {
-    one: 1, 
-    two: 2, 
-    three: 3
-  }, 
-  b: [1,2,3]
-};
-var recursiveEncoded = $.param(myObject);
+				  a: {
+					one: 1,
+					two: 2,
+					three: 3
+				  },
+				  b: [1,2,3]
+				};
+var recursiveEncoded = $.param(myObject);    //序列化一个 key/value 对象 形如：width=1680&height=1050  该序列化值可在进行 AJAX 请求时在 URL 查询字符串中使用
 var recursiveDecoded = decodeURIComponent($.param(myObject));
 
 alert(recursiveEncoded);

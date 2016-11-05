@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax</title>
+	</head>
+	<body>
+		<label>用户名</label>
+		<span>name值</span>
+		<a href="javascript:;" onclick=ajaxread()></a>
+
+		<div id="userIdSpan"></div>
+		<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function createXMLHttpRequest() {
+				//表示当前浏览器不是ie,如ns,firefox
+				if(window.XMLHttpRequest) {
+					xmlHttp = new XMLHttpRequest();
+				} else if (window.ActiveXObject) {
+					xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+			}
+
+			//客户端事件触发
+			function validate(field){
+				if(trim(field.value).length!=0) {
+					//创建XMLHttpRequest
+					createXMLHttpRequest() ;
+					var url="user_validate.jsp?userId=" + trim(field.value)+"×tampt="+new Date().getTime();
+					// alert(url);
+					xmlHttp.open("GET", url, true);
+					//方法地址。处理完成后自动调用，回调。
+					xmlHttp.onreadystatechange=callback ;
+					xmlHttp.send(null);//将参数发送到Ajax引擎
+				} else{ document.getElementById("userIdSpan").innerHTML = ""; }
+			}
+
+			function callback() {
+				{
+					alert(xmlHttp.readyState);
+					if (xmlHttp.readyState == 4) { //Ajax引擎初始化
+						if (xmlHttp.status == 200) { //http协议成功
+							//alert(xmlHttp.responseText);
+							document.getElementById("userIdSpan").innerHTML = "<font color='red'>" + xmlHttp.responseText + "</font>";
+						} else {
+							alert("请求失败，错误码=" + xmlHttp.status);
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

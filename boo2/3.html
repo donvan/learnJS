@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正确处理jscript特殊 值 </title>
+</head>
+<body>
+<p>对于自定义对象是无效的，因为自定义对象被 转换为字符串后，返回 的值 是没有规律的。</p>
+<script>
+    typeof NaN === 'number';    //true
+    + '0';  //0
+    +'abc'; //NaN
+
+    NaN === NaN;    //se
+    N !== NaN;    //true
+
+    isNaN(NaN); //true
+    isNaN(0);  //false
+    isNaN('0'); //alse
+    isNaN('abc'); //true
+
+    //判断一个值 是否可用做数字的该当是isFinite函数，它会筛除掉NaN和finity
+    //但它会试图把不是数字 的值 转化为数字
+    //我们可以自定义函数：
+    var isNumber = function isNumber(value){
+        return typeof value === 'number' && isFinite(value);
+    }
+
+
+
+</script>
+</body>
+</html>

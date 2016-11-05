@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高阶函数之参数传递</title>
+    <style>
+    </style>
+</head>
+<body>
+<div id="myDiv">
+    myDiv
+</div>
+<script>
+    /**
+     * [addHandler 处理事件注册兼容]
+     * @param {[type]} elem    [dom元素]
+     * @param {[type]} type    [事件类型]
+     * @param {[type]} handler [事件处理程序]
+     */
+    function addHandler(elem, type, handler) {
+        if (document.addEventListener) {
+            elem.addEventListener(type, handler);
+        }else if (document.attachEvent) {
+            elem.attachEvent('on' + type, handler);
+        }else {
+            elem['on' + type] = handler;
+        }
+    }
+    function fn1(e) {
+        console.log(e);
+    }
+    var div = document.getElementById('myDiv');
+    addHandler(div, 'click', fn1);
+</script>
+</body>
+</html>

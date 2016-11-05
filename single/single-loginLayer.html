@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #loginLayer{
+            position: absolute;
+            width:450px;
+            height:320px;
+            border:1px solid #ddd;
+            background-color: #fff;
+            left:50%;
+            top:30%;
+            margin-left:-225px;
+        }
+        #close{
+            position: absolute;
+            top:0;
+            right:0;
+            width:20px;
+            height:20px;
+            background-color: #dddddd;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<a href="#" id="loginBtn">登录窗口</a>
+<a href="#" id="loginBtn2">iframe登录窗口</a>
+<script>
+    var getSingle = function(fn){
+        var result;
+        return function(){
+            return result || (result = fn.apply(this,arguments));
+        }
+    }
+
+    var createLoginLayer = function(){
+        var div = document.createElement('div');
+        div.id='loginLayer';
+        div.innerHTML = '我是登录窗口<a id="close" href="#">x</a>';
+        div.style.display = 'none';
+        document.body.appendChild(div);
+        return div;
+    };
+
+    var createSingleLoginLayer = getSingle(createLoginLayer);
+    document.getElementById('loginBtn').onclick = function(){
+        var loginLayer = createSingleLoginLayer();
+        loginLayer.style.display = 'block';
+
+        document.getElementById('close').onclick=function(){
+            var loginLayer = createSingleLoginLayer();
+            loginLayer.style.display = 'none';
+        }
+    };
+
+    //创建唯一的iframe
+    var createSingleIframe = getSingle(function(){
+       var iframe = document.createElement('iframe');
+        document.body.appendChild(iframe);
+        return iframe;
+    });
+
+    document.getElementById('loginBtn2').onclick=function(){
+        var loginLayer = createSingleIframe();
+        loginLayer.src = 'http://baidu.com';
+    }
+
+</script>
+</body>
+</html>
