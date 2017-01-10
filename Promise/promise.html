@@ -4,17 +4,17 @@
 <head>
     <meta charset="utf-8">
     <title>ES6之Promise</title>
-    <script type="text/javascript">
-        function runAsync1(){
-            var p = new Promise(function(resolve, reject){
-                //做一些异步操作
-                setTimeout(function(){
-                    console.log('异步任务1执行完成');
-                    resolve('随便什么数据1');
-                }, 1000);
-            });
-            return p;
-        }
+        <script type="text/javascript">
+                function runAsync1(){
+                    var p = new Promise(function(resolve, reject){
+                        //做一些异步操作
+                        setTimeout(function(){
+                            console.log('异步任务1执行完成');
+                            resolve('随便什么数据1');
+                        }, 1000);
+                    });
+                    return p;
+                }
         function runAsync2(){
             var p = new Promise(function(resolve, reject){
                 //做一些异步操作
