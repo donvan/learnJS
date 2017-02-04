@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this,call,apply</title>
+</head>
+<body>
+
+<script>
+    var x;
+    var mycars = new Array() ;
+    mycars[0] = "宝马";
+    mycars[1] = "奔驰";
+    mycars[2] = "宾利";
+    mycars['name'] = '默认属性';
+
+    for (x in mycars)
+    {
+        console.log(typeof(x) +' ' + x + ' '  + mycars[x] + "<br />");   //以前的做法，不提倡 有陷阱
+    }
+
+    mycars.forEach( (value,key) => console.log(value,key));    //遍历数组用forEach
+
+    for ( value of mycars ){   //遍历用for of  不能取到index值 ，可以用forEach,或者转化也map对象先
+        console.log(value)
+    }
+
+    //数组转化为Map对象
+    var mapMycars = new Map (mycars.map((value,key) => [key,value]))
+    for(let[key,value] of mapMycars){
+        console.log(key,value)
+    }
+</script>
+</body>
+</html>
