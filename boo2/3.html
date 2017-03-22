@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>正确处理jscript特殊 值 </title>
+    <title>正确处理javascript特殊值 </title>
 </head>
 <body>
 <p>对于自定义对象是无效的，因为自定义对象被 转换为字符串后，返回 的值 是没有规律的。</p>
 <script>
     typeof NaN === 'number';    //true
     + '0';  //0
-    +'abc'; //NaN
+    + 'abc'; //NaN
 
-    NaN === NaN;    //se
-    N !== NaN;    //true
+    NaN === NaN;    //false
+    NaN !== NaN;    //true
 
     isNaN(NaN); //true
     isNaN(0);  //false
