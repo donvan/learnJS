@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>新旧遍历对比</title>
+    <style>
+        code{
+            margin:10px 0;
+            padding:6px 10px;
+            background-color: #f2f2f2;
+            border-left:5px solid #ccc;
+        }
+    </style>
 </head>
 <body>
 <h3>数组遍历</h3>
+
+<p>
+    for-of循环语句通过方法调用来遍历各种集合。数组、Maps对象、Sets对象以及其它在我们讨论的对象有一个共同点，它们都有一个迭代器方法。 <br>
+    你可以给任意类型的对象添加迭代器方法。
+</p>
+<p>
+    当你为对象添加myObject.toString()方法后，就可以将对象转化为字符串，同样地，当你向任意对象添加myObject[Symbol.iterator]()方法，就可以遍历这个对象了。
+    <br>
+    举个例子，假设你正在使用jQuery，尽管你非常钟情于里面的.each()方法，但你还是想让jQuery对象也支持for-of循环，你可以这样做：<br>
+
+    // 因为jQuery对象与数组相似 <br>
+    // 可以为其添加与数组一致的迭代器方法 <br>
+
+</p>
+<code>jQuery.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];</code>
 <script>
     var myArray = ['google','taobao','tencent','baidu'];
     myArray.a = 'abc';
@@ -21,11 +44,11 @@
     //小缺陷：你不能使用break语句中断循环，也不能使用return语句返回到外层函数。
     myArray.forEach(function(value,index){
         console.log(value +": " + index);
-    })
+    });
     //箭头函数写法
     myArray.forEach( (value,index) => {
         console.log( value + '->'+ index);
-    })
+    });
 
     //你可能想用for-in来试下
     //别! 因为数据下标有可能不是数字，比如 "2" + 1  就变成  "21" 了，这样迭代就出错了。 for-in用来遍历对象属性
