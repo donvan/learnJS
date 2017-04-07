@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>no jQuery</title>
+</head>
+<body>
+    <p>常用的class,id都可以使用document.querySelector  / document.querySelectorAll替代</p>
+    <p>区别是document.querySelector返回第一个匹配的Element</p>
+    <p>document.querySelectorAll返回所有匹配的element组成的NodeList  (非数组哟)<br>
+        可以通过 [].slice.call()
+    </p>
+    <p>如果匹配不到任何 Element，jQuery 返回空数组 []，但 document.querySelector 返回 null，注意空指针异常。当找不到时，也可以使用 || 设置默认的值，如 document.querySelectorAll(selector) || []</p>
+    <p>document.querySelector 和 document.querySelectorAll 性能很差。如果想提高性能，尽量使用 document.getElementById、document.getElementsByClassName 或 document.getElementsByTagName。</p>
+    <p>
+        //jQuery <br>
+        <code>$('.css')</code> <br>
+        <code>$('#id')</code><br>
+        <code>$el.find('li')</code> <br>
+        <code>$('body')</code> <br><br>
+        <code>$el.attr('foo')</code><br>
+        <code>$el.siblings()</code><br>
+        <br>//Native<br>
+        <code>document.querySelectorAll('.css')</code><br>
+        <code>document.querySelector('#id')</code><br>
+        <code>el.querySelectorAll('li')</code><br>
+        <code>document.body</code><br><br>
+        <code>el.getAttribute('foo')</code><br>
+        <code>[].filter.apply(el.parentNode.children,function(child){
+                return child !==el;
+            })</code>
+        <br>//or<br>
+        <code>document.getElementsByClassName('css')</code><br>
+        <code>document.getElementById('id')</code><br>
+    </p>
+<script>
+
+</script>
+</body>
+</html>

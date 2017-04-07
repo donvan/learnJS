@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新旧遍历对比</title>
+</head>
+<body>
+<h3>数组遍历</h3>
+<script>
+    var myArray = ['google','taobao','tencent','baidu'];
+    myArray.a = 'abc';
+    myArray.name="dongfang";
+
+    console.log(myArray.length)
+    //以前遍历方法
+    for (var index = 0; index < myArray.length; index++) {
+        console.log(myArray[index] + ": " + index);
+    }
+
+    //ES5，数组的forEach方法 可以获取index
+    //小缺陷：你不能使用break语句中断循环，也不能使用return语句返回到外层函数。
+    myArray.forEach(function(value,index){
+        console.log(value +": " + index);
+    })
+    //箭头函数写法
+    myArray.forEach( (value,index) => {
+        console.log( value + '->'+ index);
+    })
+
+    //你可能想用for-in来试下
+    //别! 因为数据下标有可能不是数字，比如 "2" + 1  就变成  "21" 了，这样迭代就出错了。 for-in用来遍历对象属性
+    for (var index in myArray) { // 千万别这样做
+        console.log(myArray[index]);
+    }
+
+    //ES6
+    //数组的for-of获取不了index,可以使用forEach
+    for (var value of myArray) {
+        console.log(value)
+    }
+
+    //可以把数组想办法转成 Map
+    var myArrayMap = new Map( myArray.map( ( item, i ) => [ i, item ] ) )
+
+    for( let [value,index] of myArrayMap) {
+        console.log(value,index)
+    }
+
+</script>
+</body>
+</html>
