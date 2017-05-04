@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承实现方式1</title>
+</head>
+<body>
+<h3>构造继承</h3>
+<h5>核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）</h5>
+<pre>
+function Cat(name){
+    Animal.call(this);
+    this.name = name || 'Tom';
+}
+    //Test code
+    var cat = new Cat();
+    console.log(cat.name);
+    console.log(cat.sleep);
+    console.log(cat instanceof Animal); //false
+    console.log(cat instanceof Cat);  //true
+</pre>
+<p>优点</p>
+<ol>
+    <li>解决了1中，子类实例共享父类引用属性的问题</li>
+    <li>创建子类实例时，可以向父类传递参数</li>
+    <li>可以实现多继承（call多个父类对象）</li>
+</ol>
+<p>缺点</p>
+<ol>
+    <li>实例并不是父类的实例，只是子类的实例</li>
+    <li>只能继承父类的实例属性和方法，不能继承原型属性/方法</li>
+    <li>无法实现函数复用，每个子类都有父类实例函数的副本，影响性能</li>
+</ol>
+<p>缺点3</p>
+</body>
+</html>

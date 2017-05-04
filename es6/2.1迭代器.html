@@ -29,6 +29,8 @@
 
 </p>
 <code>jQuery.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];</code>
+<p>标准委员会可以把这个方法命名为.iterator()方法，但是如果你的代码中的对象可能也有一些.iterator()方法，这一定会让你感到非常困惑。于是在ES6标准中使用symbol来作为方法名，而不是使用字符串。</p>
+
 <script>
     var myArray = ['google','taobao','tencent','baidu'];
     myArray.a = 'abc';

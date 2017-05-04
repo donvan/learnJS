@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承实现方式1</title>
+</head>
+<body>
+<p>http://www.cnblogs.com/humin/p/4556820.html</p>
+<p>既然要实现继承，那么 首先得有一个父类，代码如下：</p>
+<pre>
+    function Animal(name) {//构造函数
+        //属性
+        this.name = name || 'Animal';
+        //对象（实例）方法
+        this.sleep = function (){
+            console.log(this.name + '在睡觉!');
+        }
+    }
+    //类方法
+    Animal.Run = function() {
+        console.log('i can run');
+    }
+    //原型方法
+    Animal.prototype.eat = function (food){
+        console.log(this.name + '正在吃：' + food);
+    }
+
+    //测试
+    var duck = new Animal('duck');
+
+    duck.sleep();   //对象方法需要通过实例化类去调用
+    Animal.Run();   //类方法不需要通过实例化类去调用
+    duck.eat('rice'); //原型方法也需要实例化类去调用
+
+    1、对象（实例）方法包括构造函数中的方法以及构造函数原型上面的方法；
+    2、类方法，其实这里的类就是一个函数，在js中由于函数也是一个对象，所以可以为函数添加属性以及方法，这种方法在node中用的比较多；
+    3、原型方法一般用于对象实例共享，比如Person.prototype.sayName=function(){console.log(this.name);};在原型上面添加该方法，就能实现共享。
+    这样就不用每一次初始化一个实例的时候，为其分配相应的内存了。
+</pre>
+
+</body>
+</html>

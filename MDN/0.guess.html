@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>像程序员一样思考</title>
+    <style>
+        input{
+            outline:none;
+        }
+    </style>
+</head>
+<body>
+<h1>像程序员一样思考</h1>
+<p>做一个猜数字游戏</p>
+<p>我想让你创建一个可以猜数字的游戏，它会在1~100以内随机选择一个数, 然后让玩家挑战在10轮以内猜出这个数字，每一轮都要告诉玩家正确或者错误，
+    <br>如果出错了，则告诉他数字是低了还是高了，并且还要告诉玩家之前猜的数字是什么。 <br>一旦玩家猜测正确，或者他们用完了回合，游戏将结束。 游戏结束后，可以让玩家选择再次开始。</p>
+<div>
+    <h3>解构思考：</h3>
+    <ol>
+        <li>生成1到100之间的随机数</li>
+        <li>记录玩家在第几轮。从1开始</li>
+        <li>为玩家提供一种猜测数字的方法。（输入框）</li>
+        <li>一旦提交猜测，首先将它记录在某处，以便用户可以看到他们先前的猜测</li>
+        <li>检查它是否是正确数字</li>
+        <li>如果是正确的：
+            <ul>
+                <li>显示祝贺消息</li>
+                <li>阻止玩家输入更多的猜测</li>
+                <li>显示控制按钮。允许玩家重新开始游戏</li>
+            </ul>
+        </li>
+        <li>如果它是错误的，并且玩家有剩余轮次
+            <ul>
+                <li>告诉玩家 错了。</li>
+                <li>允许玩家输入另一个猜测</li>
+                <li>将剩余轮次减1</li>
+            </ul>
+        </li>
+        <li>
+            如果它是错误的，并且玩家剩余轮次为0
+            <ul>
+                <li>告诉玩家游戏结束。</li>
+                <li>阻止玩家输入另一个猜测</li>
+                <li>显示控制按钮。允许玩家重新开始游戏</li>
+            </ul>
+        </li>
+        <li>一旦玩家重新开始游戏，确保游戏逻辑和用户界面重置，然后返回步骤1</li>
+    </ol>
+</div>
+<div class="resultParas">
+    <p class="guesses"></p>
+    <p class="lastResult"></p>
+    <p class="lowOrHi"></p>
+</div>
+<label for="guessField">Enter a guess: </label>
+<input type="text" id="guessField" class="guessField">
+<input type="submit" value="Submit guess" class="guessSubmit">
+<script>
+    //var randomNumber = Math.floor(Math.random()*100) + 1;
+    var randomNumber = Math.ceil(Math.random()*100);
+    var guesses = document.querySelector('.guesses');
+    var lastResult = document.querySelector('.lastResult');
+    var lowOrHi = document.querySelector('.lowOrHi');
+
+    var guessSubmit = document.querySelector('.guessSubmit');
+    var guessField = document.querySelector('.guessField');
+
+    var guessCount = 1;
+    var resetButton;
+
+    function checkGuess() {
+        var userGuess = Number(guessField.value);
+        console.log(userGuess);
+        if(userGuess===0){
+            alert('请输入1~100间的竞猜数字哦')
+        }else{
+            if(guessCount === 1) {
+                guesses.textContent ='上一个数字: ';
+            }
+            guesses.textContent += userGuess + ' ';
+
+            if(userGuess === randomNumber) {
+                lastResult.textContent = '恭喜，你猜对了！';
+                lastResult.style.backgroundColor = 'green';
+                lowOrHi.textContent = '';
+                setGameOver();
+            } else if (guessCount === 10) {
+                lastResult.textContent = '失败了，游戏结束！'
+                setGameOver();
+            } else {
+                lastResult.textContent = '错误！';
+                lastResult.style.backgroundColor = 'red';
+                if(userGuess < randomNumber) {
+                    lowOrHi.textContent = '您猜低了'
+                } else if(userGuess > randomNumber) {
+                    lowOrHi.textContent = '您猜高了';
+                }
+            }
+
+            guessCount++;
+            guessField.value = '';
+            guessField.focus();
+        }
+    }
+
+    function setGameOver() {
+        guessField.disabled = true;
+        guessSubmit.disabled = true;
+        resetButton = document.createElement('button');
+        resetButton.textContent = '重新游戏';
+        document.body.appendChild(resetButton);
+        resetButton.addEventListener('click',resetGame);
+    }
+
+    function resetGame() {
+        guessCount = 1;
+
+        var resetParas = document.querySelectorAll('.resultParas p');
+        for (var i = 0 ;i < resetParas.length; i++) {
+            resetParas[i].textContent = '';
+        }
+
+        resetButton.parentNode.removeChild(resetButton);
+
+        guessField.disabled = false;
+        guessSubmit.disabled = false;
+        guessField.value = '';
+        guessField.focus();
+
+        lastResult.style.backgroundColor = 'white';
+
+        randomNumber = Math.ceil(Math.random()*100);
+    }
+
+
+    guessSubmit.addEventListener('click', checkGuess);
+
+
+</script>
+</body>
+</html>
