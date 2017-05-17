@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承实现方式1</title>
+</head>
+<body>
+<h3>实例继承</h3>
+<h5>核心：为父类实例添加新特性，作为子类实例返回</h5>
+<pre>
+    function Cat(name){
+        var instance = new Animal();
+        instance.name = name || 'Tom';
+        return instance;
+    }
+
+    //Test code
+    var cat = new Cat();
+    console.log(cat.name);
+    console.log(cat.sleep);
+    console.log(cat instanceof Animal); //true
+    console.log(cat instanceof Cat);  //false
+</pre>
+<p>优点</p>
+<ol>
+    <li>不限制调用方式，不管是new 子类()还是子类(),返回的对象具有相同的效果</li>
+
+</ol>
+<p>缺点</p>
+<ol>
+    <li>实例是父类的实例，不是子类的实例</li>
+    <li>不支持多继承</li>
+</ol>
+<p>缺点3</p>
+</body>
+</html>
