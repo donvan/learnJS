@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成随机字符串</title>
+</head>
+<body>
+<input type="button" >
+<button></button>
+
+<script>
+    var input = document.getElementsByTagName('input[type=button]')[0];
+    console.log(input);
+
+    input.onclick = function A() {
+        setTimeout(function B() {
+            input.value +=' input';
+        }, 0)
+    };
+
+    document.body.onclick = function C() {
+        input.value += ' body'
+    };
+</script>
+</body>
+</html>

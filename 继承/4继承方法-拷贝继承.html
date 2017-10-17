@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承实现方式1</title>
+</head>
+<body>
+<h3>拷贝继承</h3>
+<h5>核心：为父类实例添加新特性，作为子类实例返回</h5>
+<pre>
+    function Cat(name){
+        var animal = new Animal();
+        for (var p in animal) {
+            Cat.prototype[p] = animal[p];
+        }
+        Cat.prototype.name = name || 'Tom';
+    }
+
+    //Test code
+    var cat = new Cat();
+    console.log(cat.name);
+    console.log(cat.sleep);
+    console.log(cat instanceof Animal); //false
+    console.log(cat instanceof Cat);  // true
+</pre>
+<p>优点</p>
+<ol>
+    <li>支持多继承</li>
+
+</ol>
+<p>缺点</p>
+<ol>
+    <li>效率较低，内存占用高（因为要拷贝父类的属性）</li>
+    <li>无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）</li>
+</ol>
+
+<p>不推荐</p>
+</body>
+</html>

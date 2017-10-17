@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成随机字符串</title>
+</head>
+<body>
+<div id="random"></div>
+<script>
+    function random_str(length) {
+        var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        ALPHABET += 'abcdefghijklmnopqrstuvwxyz';
+        ALPHABET += '0123456789-_';
+        var str = '';
+
+        for (var i = 0; i < length; i++) {
+            var rand = Math.floor(Math.random() * ALPHABET.length);
+            str += ALPHABET.substring(rand, rand + 1);
+        }
+
+        return str;
+    }
+
+    var str = random_str(6);
+
+    document.getElementById('random').innerText = str;
+</script>
+</body>
+</html>
